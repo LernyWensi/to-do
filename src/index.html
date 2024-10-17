@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+            rel="stylesheet"
+        />
+        <script src="script.js" type="module"></script>
+        <link rel="stylesheet" href="style.css" />
+        <title>ta-da</title>
+    </head>
+    <body>
+        <search>
+            <div class="search-menu">
+                <input id="filter-search" type="text" placeholder="Search" />
+
+                <menu class="buttons">
+                    <li>
+                        <button id="creation-dialog-open" type="button">Create</button>
+                    </li>
+                    <li>
+                        <button id="filter-dialog-open" type="button">Filters</button>
+                    </li>
+                </menu>
+            </div>
+
+            <menu id="filter-result-list" class="result-list"></menu>
+
+            <dialog id="creation-dialog">
+                <form id="creation-form" method="dialog">
+                    <div>
+                        <label for="creation-title">
+                            Title
+                            <input
+                                id="creation-title"
+                                name="title"
+                                type="text"
+                                minlength="1"
+                                required
+                            />
+                        </label>
+
+                        <label for="creation-priority">
+                            Priority
+                            <select id="creation-priority" name="priority">
+                                <option value="None" selected>None</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </label>
+
+                        <label for="creation-due-date">
+                            Due Date
+                            <input id="creation-due-date" name="due-date" type="date" />
+                        </label>
+
+                        <label for="creation-list">
+                            List
+                            <select name="list" id="creation-list">
+                                <option value="new" selected>New</option>
+                            </select>
+                        </label>
+
+                        <label for="creation-list-name">
+                            List Name
+                            <input
+                                id="creation-list-name"
+                                name="list-name"
+                                type="text"
+                                minlength="1"
+                                required
+                            />
+                        </label>
+
+                        <label for="creation-description">
+                            Description
+                            <textarea
+                                id="creation-description"
+                                name="description"
+                                rows="5"
+                                cols="30"
+                                maxlength="150"
+                            ></textarea>
+                        </label>
+                    </div>
+
+                    <menu>
+                        <li>
+                            <button type="submit">Create</button>
+                        </li>
+                        <li>
+                            <button id="creation-dialog-close" type="button">
+                                Cancel
+                            </button>
+                        </li>
+                        <li>
+                            <button type="reset">Reset</button>
+                        </li>
+                    </menu>
+                </form>
+            </dialog>
+
+            <dialog id="filter-dialog">
+                <form id="filter-form" method="dialog">
+                    <div>
+                        <fieldset>
+                            <legend>Completeness</legend>
+
+                            <label for="filter-is-completed">
+                                Completed
+                                <input
+                                    id="filter-is-completed"
+                                    name="is-completed"
+                                    type="checkbox"
+                                />
+                            </label>
+
+                            <label for="filter-is-incomplete">
+                                Incomplete
+                                <input
+                                    id="filter-is-incomplete"
+                                    name="is-incomplete"
+                                    type="checkbox"
+                                />
+                            </label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Priority</legend>
+
+                            <label for="filter-priority-none">
+                                None
+                                <input
+                                    id="filter-priority-none"
+                                    name="priority-none"
+                                    type="checkbox"
+                                />
+                            </label>
+
+                            <label for="filter-priority-low">
+                                Low
+                                <input
+                                    id="filter-priority-low"
+                                    name="priority-low"
+                                    type="checkbox"
+                                />
+                            </label>
+
+                            <label for="filter-priority-medium">
+                                Medium
+                                <input
+                                    id="filter-priority-medium"
+                                    name="priority-medium"
+                                    type="checkbox"
+                                />
+                            </label>
+
+                            <label for="filter-priority-high">
+                                High
+                                <input
+                                    id="filter-priority-high"
+                                    name="priority-high"
+                                    type="checkbox"
+                                />
+                            </label>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Period</legend>
+
+                            <label for="filter-period-start">
+                                Start
+                                <input
+                                    id="filter-period-start"
+                                    name="period-start"
+                                    type="date"
+                                />
+                            </label>
+
+                            <label for="filter-period-end">
+                                End
+                                <input
+                                    id="filter-period-end"
+                                    name="period-end"
+                                    type="date"
+                                />
+                            </label>
+                        </fieldset>
+
+                        <fieldset id="filter-list">
+                            <legend>List</legend>
+                        </fieldset>
+                    </div>
+
+                    <menu>
+                        <li>
+                            <button type="submit">Apply</button>
+                        </li>
+                        <li>
+                            <button id="filter-dialog-close" type="button">Cancel</button>
+                        </li>
+                        <li>
+                            <button type="reset">Reset</button>
+                        </li>
+                    </menu>
+                </form>
+            </dialog>
+
+            <dialog id="filter-modify-dialog">
+                <form id="filter-modify-form" method="dialog">
+                    <div>
+                        <label for="filter-modify-title">
+                            Title
+                            <input
+                                id="filter-modify-title"
+                                name="title"
+                                type="text"
+                                minlength="1"
+                                required
+                            />
+                        </label>
+
+                        <label for="filter-modify-priority">
+                            Priority
+                            <select id="filter-modify-priority" name="priority">
+                                <option value="None" selected>None</option>
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
+                        </label>
+
+                        <label for="filter-modify-due-date">
+                            Due Date
+                            <input
+                                id="filter-modify-due-date"
+                                name="due-date"
+                                type="date"
+                            />
+                        </label>
+
+                        <label for="filter-modify-description">
+                            Description
+                            <textarea
+                                id="filter-modify-description"
+                                name="description"
+                                rows="5"
+                                cols="30"
+                                maxlength="150"
+                            ></textarea>
+                        </label>
+                    </div>
+
+                    <menu>
+                        <li>
+                            <button type="submit">Modify</button>
+                        </li>
+                        <li>
+                            <button id="filter-modify-dialog-close" type="button">
+                                Cancel
+                            </button>
+                        </li>
+                        <li>
+                            <button type="reset">Reset</button>
+                        </li>
+                    </menu>
+                </form>
+            </dialog>
+        </search>
+    </body>
+</html>

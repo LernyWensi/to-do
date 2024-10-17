@@ -1,0 +1,161 @@
+search {
+    padding: 0 0.5em 0.5em 0.5em;
+    width: 100%;
+    max-width: 25rem;
+    display: flex;
+    flex-direction: column;
+
+    > .search-menu {
+        padding: 0.5em 0;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        background-color: var(--color-background);
+        z-index: 1000;
+
+        > .buttons {
+            display: flex;
+            gap: 0.5em;
+
+            > li {
+                flex: 50%;
+
+                > button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .result-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+
+        > .item {
+            padding: 0.5em;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            background-color: var(--color-background-subtle);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            border: var(--border);
+            transition: all 0.1s ease-out;
+
+            > .block {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                gap: 0.5em;
+                color: var(--color-foreground-subtle);
+
+                > .title {
+                    max-width: 60%;
+                    color: var(--color-foreground);
+                    text-wrap: wrap;
+                    text-overflow: ellipsis;
+                    overflow-x: hidden;
+                }
+
+                > .priority {
+                    padding: 0 0.5em;
+                    color: var(--color-foreground);
+                    border-radius: var(--border-radius);
+                }
+
+                > .priority-none {
+                    background-color: var(--color-priority-none);
+                }
+
+                > .priority-low {
+                    background-color: var(--color-priority-low);
+                }
+
+                > .priority-medium {
+                    background-color: var(--color-priority-medium);
+                }
+
+                > .priority-high {
+                    background-color: var(--color-priority-high);
+                }
+
+                &:not(.description-block) :last-child {
+                    text-align: right;
+                }
+
+                &:not(:nth-last-child(2)) {
+                    padding-bottom: 0.5em;
+                    border-bottom: var(--border);
+                }
+
+                &.description-block {
+                    flex-direction: column;
+                    max-width: 25rem;
+
+                    :last-child {
+                        word-break: break-all;
+                        text-wrap: pretty;
+                    }
+                }
+            }
+
+            > .menu {
+                margin-top: -0.5em;
+                height: 0;
+                display: flex;
+                justify-content: space-between;
+                gap: 0.5em;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.1s ease-out;
+
+                > li {
+                    flex: 1 0 30%;
+
+                    > button {
+                        width: 100%;
+
+                        &.toggle {
+                            color: var(--color-green);
+                        }
+
+                        &.modify {
+                            color: var(--color-yellow);
+                        }
+
+                        &.remove {
+                            color: var(--color-red);
+                        }
+                    }
+                }
+            }
+
+            &:hover {
+                filter: brightness(1.1);
+            }
+
+            &.completed {
+                text-decoration: line-through;
+                filter: brightness(0.7);
+            }
+
+            &.selected {
+                > .menu {
+                    margin-top: 0;
+                    height: 2em;
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+                > .block > .title {
+                    color: var(--color-foreground);
+                    word-break: break-word;
+                }
+            }
+        }
+    }
+}

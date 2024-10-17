@@ -1,0 +1,25 @@
+:root {
+    --color-background: #000000;
+    --color-background-subtle: #303030;
+
+    --color-foreground: #f8f8f8;
+    --color-foreground-subtle: #cccccc;
+
+    --color-green: #4ade80;
+    --color-yellow: #fbbf24;
+    --color-red: #f87171;
+
+    --color-priority-none: #94a3b8;
+    --color-priority-low: #2dd4bf;
+    --color-priority-medium: #c084fc;
+    --color-priority-high: #fb7185;
+
+    --border-radius: 0.5em;
+
+    --border: 0.1rem solid #505050;
+    --border-highlight: 0.1rem solid #aaaaaa;
+
+    --outline: 0.1rem dashed transparent;
+    --outline-highlight: 0.1rem dashed #505050;
+    --outline-offset: 0.3em;
+}

@@ -1,0 +1,91 @@
+dialog {
+    padding: 1em 1em 0 1em;
+    margin: auto auto;
+    width: calc(100% - 1em);
+    max-width: 25rem;
+    color: inherit;
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    border: var(--border);
+
+    > form {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+
+            > label {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+
+                > textarea {
+                    resize: none;
+                }
+            }
+
+            > fieldset {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+                border-radius: var(--border-radius);
+                border: var(--border);
+
+                > label {
+                    padding: 0.3em;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    color: var(--color-foreground-subtle);
+                    cursor: pointer;
+                    transition: all 0.1s ease;
+
+                    > input {
+                        accent-color: var(--color-green);
+                    }
+
+                    &:not(:last-child) {
+                        padding-bottom: 0.8em;
+                        border-bottom: var(--border);
+                    }
+
+                    &:hover,
+                    &:has(input:checked) {
+                        color: var(--color-foreground);
+                    }
+                }
+
+                &:last-child {
+                    height: 12rem;
+                    overflow-y: scroll;
+                }
+            }
+        }
+
+        > menu {
+            padding: 1em 0;
+            position: sticky;
+            bottom: 0;
+            display: flex;
+            gap: 0.5em;
+            background-color: var(--color-background);
+
+            > li {
+                flex: 50%;
+
+                > button {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    @media (width < 37rem) {
+        margin: auto auto 0.5em auto;
+    }
+
+    &::backdrop {
+        background-color: var(--color-background);
+        opacity: 0.5;
+    }
+}
