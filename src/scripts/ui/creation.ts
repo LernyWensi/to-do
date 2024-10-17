@@ -1,4 +1,4 @@
-import { $, dispathRepoEvent } from './utils';
+import { $, dispatchRepoEvent } from './utils';
 import * as Store from '../store';
 import * as Storage from '../storage';
 import { Repo, List, Item } from '../tada';
@@ -59,6 +59,6 @@ Creation.form.addEventListener('submit', () => {
     });
 
     Creation.list.value === 'new' ?
-        dispathRepoEvent(Repo.addList(repo, List.make(Creation.listName.value, [item])))
-    :   dispathRepoEvent(Repo.addItem(repo, Creation.list.value, item));
+        dispatchRepoEvent(Repo.addList(repo, List.make(Creation.listName.value, [item])))
+    :   dispatchRepoEvent(Repo.addItem(repo, Creation.list.value, item));
 });

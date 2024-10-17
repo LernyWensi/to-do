@@ -1,5 +1,5 @@
 import { assert, fuzzyMatch, toUpperFirstChar } from '../utils';
-import { $, $$, dispathRepoEvent } from './utils';
+import { $, $$, dispatchRepoEvent } from './utils';
 import * as Store from '../store';
 import * as Storage from '../storage';
 import { Repo, List, Item } from '../tada';
@@ -34,7 +34,7 @@ const Filter = {
 } as const;
 
 window.addEventListener('repo', (event: CustomEventInit<{ repo: Repo.Repo }>) => {
-    assert(event.detail?.repo, 'Repository is undifiend in the event details');
+    assert(event.detail?.repo, 'Repository is undefined in the event details');
 
     Storage.save(Store.repo, event.detail.repo);
 
@@ -93,7 +93,7 @@ const filter = (repo: Repo.Repo): Repo.Repo => {
 };
 
 const toggle = (listId: string, itemId: string): void => {
-    dispathRepoEvent(Repo.toggleItem(Storage.get(Store.repo), listId, itemId));
+    dispatchRepoEvent(Repo.toggleItem(Storage.get(Store.repo), listId, itemId));
 };
 
 const modify = (listId: string, itemId: string): void => {
@@ -101,7 +101,7 @@ const modify = (listId: string, itemId: string): void => {
 
     assert(
         item,
-        `Search for item by "id" provided to "modify" function returned undefied, searched for: listId: ${listId}, itemId: ${itemId}`,
+        `Search for item by "id" provided to "modify" function returned undefined, searched for: listId: ${listId}, itemId: ${itemId}`,
     );
 
     Filter.modifyTitle.value = item.title;
@@ -116,7 +116,7 @@ const modify = (listId: string, itemId: string): void => {
 };
 
 const remove = (listId: string, itemId: string): void => {
-    dispathRepoEvent(Repo.removeItem(Storage.get(Store.repo), listId, itemId));
+    dispatchRepoEvent(Repo.removeItem(Storage.get(Store.repo), listId, itemId));
 };
 
 const setupButtonListeners = (operation: 'toggle' | 'modify' | 'remove'): void => {
@@ -306,10 +306,10 @@ Filter.modifyForm.addEventListener('submit', () => {
 
     assert(
         listId && itemId,
-        `Dataset of "filter-modify-form" not fullfilled, got: listId: ${listId}, itemId: ${itemId}`,
+        `Dataset of "filter-modify-form" not fulfilled, got: listId: ${listId}, itemId: ${itemId}`,
     );
 
-    dispathRepoEvent(
+    dispatchRepoEvent(
         Repo.modifyItem(
             Storage.get(Store.repo),
             listId,

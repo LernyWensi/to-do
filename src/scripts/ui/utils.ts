@@ -1,9 +1,9 @@
-export { $, $$, dispathRepoEvent };
+export { $, $$, dispatchRepoEvent };
 
 import { assert } from '../utils';
 import { Repo } from '../tada';
 
-const dispathRepoEvent = (repo: Repo.Repo): void => {
+const dispatchRepoEvent = (repo: Repo.Repo): void => {
     window.dispatchEvent(new CustomEvent('repo', { detail: { repo } }));
 };
 
