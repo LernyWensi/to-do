@@ -1,0 +1,63 @@
+"use strict";(()=>{var J=Object.defineProperty;var S=(e,t)=>{for(var i in t)J(e,i,{get:t[i],enumerable:!0})};var f=(e,t)=>{if(!e)throw new Error(t)},O=e=>e.charAt(0).toUpperCase()+e.slice(1),z=(e,t)=>{let i=e.toLowerCase(),o=-1;return[...t].every(r=>(o=i.indexOf(r,o+1),o!==-1))};var y=e=>{window.dispatchEvent(new CustomEvent("repo",{detail:{repo:e}}))},s=(e,t,i=document)=>{let o=i.querySelector(e);return f(o instanceof t,`Selector "${e}" didn't match any elements`),o},g=(e,t,i=document)=>[...i.querySelectorAll(e)].filter(r=>r instanceof t);var d={};S(d,{Priority:()=>v,make:()=>D,modify:()=>E,toggle:()=>R});var I=()=>Date.now().toString(36)+Math.random().toString(36).substring(2);var v=(r=>(r.None="None",r.Low="Low",r.Medium="Medium",r.High="High",r))(v||{}),D=({title:e,isCompleted:t=!1,priority:i="None",description:o,dueDate:r})=>({id:I(),title:e,isCompleted:t,priority:i,description:o,dueDate:r}),E=(e,t)=>({...e,...Object.fromEntries(Object.entries(t).filter(([,i])=>i!==void 0))}),R=e=>E(e,{isCompleted:!e.isCompleted});var u={};S(u,{add:()=>M,filter:()=>T,filterByCompletion:()=>G,filterByDueDate:()=>Q,filterByPriority:()=>V,get:()=>k,make:()=>W,modify:()=>w,remove:()=>H,toggle:()=>C,update:()=>b});var W=(e,t=[])=>({id:I(),name:e,items:t}),k=(e,t)=>e.items.find(i=>i.id===t),M=(e,t)=>({...e,items:[...e.items,D(t)]}),H=(e,t)=>({...e,items:e.items.filter(i=>i.id!==t)}),b=(e,t,i)=>{let o=e.items.find(r=>r.id===t);return o?{...e,items:[...e.items.filter(r=>r.id!==t),i(o)]}:e},w=(e,t,i)=>b(e,t,o=>E(o,i)),C=(e,t)=>b(e,t,i=>R(i)),T=(e,t)=>({...e,items:e.items.filter(t)}),G=(e,{completed:t,incomplete:i})=>T(e,o=>t&&o.isCompleted||i&&!o.isCompleted||!t&&!i),V=(e,{none:t,low:i,medium:o,high:r})=>T(e,c=>t&&c.priority==="None"||i&&c.priority==="Low"||o&&c.priority==="Medium"||r&&c.priority==="High"||!t&&!i&&!o&&!r),Q=(e,{start:t,end:i})=>T(e,o=>{if(!t&&!i)return!0;if(!o.dueDate)return!1;let r=new Date(o.dueDate).getTime(),c=t?new Date(t).getTime():-1/0,q=i?new Date(i).getTime():1/0;return r>c&&r<q});var p={};S(p,{addItem:()=>ee,addList:()=>Y,filterById:()=>re,getItem:()=>_,getList:()=>j,make:()=>X,modifyItem:()=>ie,removeItem:()=>te,removeList:()=>Z,toggleItem:()=>oe,updateItem:()=>L});var X=(e=[])=>e,j=(e,t)=>e.find(i=>i.id===t),Y=(e,t)=>[...e,t],Z=(e,t)=>e.filter(i=>i.id!==t),L=(e,t,i,o)=>{let r=e.find(c=>c.id===t);return r?[...e.filter(c=>c.id!==t),o(r,i)]:e},_=(e,t,i)=>{let o=j(e,t);return o?k(o,i):void 0},ee=(e,t,i)=>L(e,t,"",o=>M(o,i)),te=(e,t,i)=>L(e,t,i,(o,r)=>H(o,r)),ie=(e,t,i,o)=>L(e,t,i,(r,c)=>w(r,c,o)),oe=(e,t,i)=>L(e,t,i,(o,r)=>C(o,r)),re=(e,t)=>t.length===0?e:e.filter(i=>t.includes(i.id));var F=(e,t)=>({key:e,fallback:t}),a=e=>{let t=localStorage.getItem(e.key);return t===null?e.fallback:JSON.parse(t)},P=(e,t)=>{localStorage.setItem(e.key,JSON.stringify(t))};var m=F("repo",p.make([u.make("Weekly Workouts",[d.make({title:"Hit the gym for a full-body workout",description:"let\u2019s get those gains!",priority:"High",dueDate:"2024-10-24"}),d.make({title:"Go for a run in the park",description:"because cardio is life",priority:"Low",dueDate:"2024-10-24"}),d.make({title:"Join a yoga class",description:"time to find my zen"})]),u.make("Weekend Projects",[d.make({title:"Clean out the garage",priority:"Low",dueDate:"2024-10-18"}),d.make({title:"Organize the closet",description:"find those lost clothes!",priority:"Medium"}),d.make({title:"Do laundry"})])])),h=F("filter",{completion:{},priority:{},dueDate:{},list:[]});var n={dialog:s("#filter-dialog",HTMLDialogElement),close:s("#filter-dialog-close",HTMLButtonElement),open:s("#filter-dialog-open",HTMLButtonElement),form:s("#filter-form",HTMLFormElement),search:s("#filter-search",HTMLInputElement),listFieldset:s("#filter-list",HTMLFieldSetElement),result:s("#filter-result-list",HTMLMenuElement),isCompleted:s("#filter-is-completed",HTMLInputElement),isIncomplete:s("#filter-is-incomplete",HTMLInputElement),priorityNone:s("#filter-priority-none",HTMLInputElement),priorityLow:s("#filter-priority-low",HTMLInputElement),priorityMedium:s("#filter-priority-medium",HTMLInputElement),priorityHigh:s("#filter-priority-high",HTMLInputElement),periodStart:s("#filter-period-start",HTMLInputElement),periodEnd:s("#filter-period-end",HTMLInputElement),modifyDialog:s("#filter-modify-dialog",HTMLDialogElement),modifyClose:s("#filter-modify-dialog-close",HTMLButtonElement),modifyForm:s("#filter-modify-form",HTMLFormElement),modifyTitle:s("#filter-modify-title",HTMLInputElement),modifyPriority:s("#filter-modify-priority",HTMLSelectElement),modifyDueDate:s("#filter-modify-due-date",HTMLInputElement),modifyDescription:s("#filter-modify-description",HTMLTextAreaElement)};window.addEventListener("repo",e=>{f(e.detail?.repo,"Repository is undifiend in the event details"),P(m,e.detail.repo),B(a(m),A)});window.addEventListener("DOMContentLoaded",()=>{N(a(m));let{completion:e,priority:t,dueDate:i}=a(h);n.isCompleted.checked=e.completed||!1,n.isIncomplete.checked=e.incomplete||!1,n.priorityNone.checked=t.none||!1,n.priorityLow.checked=t.low||!1,n.priorityMedium.checked=t.medium||!1,n.priorityHigh.checked=t.high||!1,n.periodStart.valueAsDate=i.start?new Date(i.start):null,n.periodEnd.valueAsDate=i.end?new Date(i.end):null,B(a(m),A)});var A=e=>{let t={completion:{completed:n.isCompleted.checked,incomplete:n.isIncomplete.checked},priority:{none:n.priorityNone.checked,low:n.priorityLow.checked,medium:n.priorityMedium.checked,high:n.priorityHigh.checked},dueDate:{start:n.periodStart.valueAsDate?.toString(),end:n.periodEnd.valueAsDate?.toString()},list:g('input[name="list"]',HTMLInputElement).filter(i=>i.checked).map(i=>i.value)};return P(h,t),p.filterById(e,t.list).map(i=>[o=>u.filterByDueDate(o,t.dueDate),o=>u.filterByPriority(o,t.priority),o=>u.filterByCompletion(o,t.completion)].reduce((o,r)=>r(o),i))},ne=(e,t)=>{y(p.toggleItem(a(m),e,t))},se=(e,t)=>{let i=p.getItem(a(m),e,t);f(i,`Search for item by "id" provided to "modify" function returned undefied, searched for: listId: ${e}, itemId: ${t}`),n.modifyTitle.value=i.title,n.modifyPriority.value=i.priority,n.modifyDueDate.value=i.dueDate||"",n.modifyDescription.value=i.description||"",n.modifyForm.dataset.listId=e,n.modifyForm.dataset.itemId=t,n.modifyDialog.showModal()},le=(e,t)=>{y(p.removeItem(a(m),e,t))},x=e=>{g(`[data-filter-result-item-button="${e}"]`,HTMLButtonElement).forEach(i=>{let{listId:o,itemId:r}=i.dataset;f(o&&r,`Button "${i}" has no data for "${e}" operation`),i.addEventListener("click",()=>{e==="toggle"?ne(o,r):e==="modify"?se(o,r):e==="remove"&&le(o,r)})})},B=(e,t)=>{n.result.innerHTML="",t(e).flatMap(o=>o.items.map(r=>({list:o,item:r}))).sort((o,r)=>o.item.title>r.item.title?1:-1).forEach(({list:o,item:r})=>{n.result.insertAdjacentHTML("beforeend",`
+                    <li class="item ${r.isCompleted?"completed":"incomplete"}">
+                        <div class="block">
+                            <span class="title">${r.title}</span>
+                            <span>${o.name}</span>
+                        </div>
+
+                        <div class="block">
+                            <span class="title">Priority</span>
+                            <span class="priority priority-${r.priority.toLowerCase()}">${r.priority}</span>
+                        </div>
+
+                        ${r.dueDate?`
+                                    <div class="block">
+                                        <span class="title">Due Date</span>
+                                        <span>${r.dueDate}</span>
+                                    </div>
+                                `:""}
+
+                        ${r.description?`
+                                     <div class="block description-block">
+                                        <p class="title">Description</p>
+                                        <p>${r.description}</p>
+                                    </div>
+                                `:""}
+                        
+                        <menu class="menu">
+                            <li>
+                                <button 
+                                    class="toggle"
+                                    data-list-id="${o.id}"
+                                    data-item-id="${r.id}"
+                                    data-filter-result-item-button="toggle"
+                                    type="button"
+                                >
+                                    ${r.isCompleted?"Uncheck":"Check"}
+                                </button>
+                            </li>
+                            <li>
+                                <button 
+                                    class="modify"
+                                    data-list-id="${o.id}"
+                                    data-item-id="${r.id}"
+                                    data-filter-result-item-button="modify"
+                                    type="button"
+                                >
+                                    Modify
+                                </button>
+                            </li>
+                            <li>
+                                <button 
+                                    class="remove"
+                                    data-list-id="${o.id}"
+                                    data-item-id="${r.id}"
+                                    data-filter-result-item-button="remove"
+                                    type="button"
+                                >
+                                    Remove
+                                </button>
+                            </li>
+                        </menu>
+                    </li>
+                `)});let i=g("li",HTMLLIElement,n.result);i.forEach(o=>{o.addEventListener("click",()=>{i.forEach(r=>void r.classList.remove("selected")),o.classList.add("selected")})}),x("toggle"),x("modify"),x("remove")},N=e=>{n.listFieldset.innerHTML="<legend>List</legend>";let t=a(h);e.forEach(i=>{let o=document.createElement("label");o.setAttribute("for",`filter-list-${i.id}`),o.textContent=O(i.name);let r=document.createElement("input");r.setAttribute("id",`filter-list-${i.id}`),r.setAttribute("name","list"),r.setAttribute("value",i.id),r.setAttribute("type","checkbox"),r.checked=t.list.includes(i.id),o.appendChild(r),n.listFieldset.appendChild(o)})};n.dialog.addEventListener("close",()=>{N(a(m))});n.open.addEventListener("click",()=>{N(a(m)),n.dialog.showModal()});n.close.addEventListener("click",()=>{n.dialog.close()});n.form.addEventListener("submit",()=>{B(a(m),A),n.dialog.close()});n.search.addEventListener("input",()=>{let e=g("& > li",HTMLLIElement,n.result),t=n.search.value.toLowerCase();e.forEach(i=>{let o=s(".title",HTMLSpanElement,i).textContent.toLowerCase();i.style.display=z(o,t)?"flex":"none"})});n.modifyDialog.addEventListener("close",()=>{n.modifyForm.reset()});n.modifyClose.addEventListener("click",()=>{n.modifyDialog.close()});n.modifyForm.addEventListener("submit",()=>{let{listId:e,itemId:t}=n.modifyForm.dataset;f(e&&t,`Dataset of "filter-modify-form" not fullfilled, got: listId: ${e}, itemId: ${t}`),y(p.modifyItem(a(m),e,t,d.make({title:n.modifyTitle.value,priority:d.Priority[n.modifyPriority.value],dueDate:n.modifyDueDate.value||void 0,description:n.modifyDescription.value||void 0}))),n.modifyForm.dataset.listId=void 0,n.modifyForm.dataset.itemId=void 0});var l={dialog:s("#creation-dialog",HTMLDialogElement),close:s("#creation-dialog-close",HTMLButtonElement),open:s("#creation-dialog-open",HTMLButtonElement),form:s("#creation-form",HTMLFormElement),title:s("#creation-title",HTMLInputElement),priority:s("#creation-priority",HTMLSelectElement),dueDate:s("#creation-due-date",HTMLInputElement),description:s("#creation-description",HTMLTextAreaElement),list:s("#creation-list",HTMLSelectElement),listName:s("#creation-list-name",HTMLInputElement)},U=e=>{l.list.innerHTML='<option value="new" selected>New</option>',e.forEach(t=>{l.list.insertAdjacentHTML("beforeend",`<option value="${t.id}">${t.name}</option>`)})};l.dialog.addEventListener("close",()=>{U(a(m)),l.listName.disabled=!1,l.form.reset()});l.open.addEventListener("click",()=>{U(a(m)),l.dialog.showModal()});l.close.addEventListener("click",()=>{l.dialog.close()});l.list.addEventListener("change",()=>{l.listName.disabled=l.list.value!=="new"});l.form.addEventListener("submit",()=>{let e=a(m),t=d.make({title:l.title.value,priority:d.Priority[l.priority.value],dueDate:l.dueDate.value||void 0,description:l.description.value||void 0});l.list.value==="new"?y(p.addList(e,u.make(l.listName.value,[t]))):y(p.addItem(e,l.list.value,t))});window.DEVELOPMENT&&new EventSource("/esbuild").addEventListener("change",()=>location.reload());})();
